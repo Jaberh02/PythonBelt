@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+</head>
+<body>
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	<div>
+		<div class="welcome"><h1>Welcome, {{user.first_name}}!</h1></div>
+		<div class="logout">
+			<a href="/addtrip">Add New Trip</a> |
+			<a href="/logout">Logout</a>
+		</div>
+	</div>
+	<h2>Other User's Travel Plans</h2>
+	<table border="1">
+		<thead>
+			<th>Name</th>
+			<th>Travel Start Date</th>
+			<th>Travel End Date</th>
+			<th>Do You Want To Join?</th>
+		</thead>
+		<tbody>
+			{% for x in all_plans %}
+			<tr>
+				<td><a href="/view/{{x.id}}">{{x.description}}</a></td>
+				<td>{{x.start_date.date}}</td>
+				<td>{{x.end_date.date}}</td>
+				<td><a href="/join/{{x.id}}">Join!</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h2>My Travel Plans</h2>
+	<table border="1">
+		<thead>
+			<th>Name</th>
+			<th>Travel Start Date</th>
+			<th>Travel End Date</th>
+			<th>Plan</th>
+			<th>Action</th>
+		</thead>
+		<tbody>
+			{% for x in my_plans %}
+			<tr>
+				<td><a href="/view/{{x.id}}">{{x.description}}</a></td>
+				<td>{{x.start_date.date}}</td>
+				<td>{{x.end_date.date}}</td>
+				<td>{{x.plan}}</td>
+				<td><a href="/cancel/{{x.id}}">Cancel</a> 
+					{% if request.session.user_id == x.user_id %}
+						<a href="/delete/{{x.id}}">Delete</a></td>
+					{% endif %}				
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+</body>
+</html>

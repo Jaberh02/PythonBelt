@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+</head>
+<body>
+	{% for x in trips %}
+		<h2>{{x.description}}</h2>
+		<p>Planned By: {{x.user.first_name}} {{x.user.last_name}} </p>
+		<p>Description: {{x.plan}}</p>
+		<p>Travel Date From: {{x.start_date.date}}</p>
+		<p>Travel Date To: {{x.end_date.date}}</p>
+		<h3>Other Users Joining the Trip</h3>
+	{% endfor %}
+	{% for x in attendees %}
+		<li>{{x.first_name}} {{x.last_name}}</li>
+	{% endfor %}
+	
+	
+	<p><a href="/travels">Back</a> | <a href="/logout">Logout</a></p>
+</body>
+</html>

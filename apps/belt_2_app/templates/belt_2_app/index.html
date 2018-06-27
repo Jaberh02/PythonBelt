@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<style type="text/css">
+		.register{
+			/*border: 2px solid black;*/
+			width: 400px;
+			display: inline-block;
+			margin-left: 200px;
+		}
+		.login{
+			/*border: 2px solid black;*/
+			width: 400px;
+			display: inline-block;
+			vertical-align: top;
+		}
+		.welcome{
+			text-align: center;
+			color: lightgreen;
+		}
+		button{
+			margin-left: 130px;
+		}
+	</style>
+	<title></title>
+</head>
+<body>
+	<h1 class="welcome">Welcome, Login or Sign up!</h1>
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	<div class="register">
+		<form action="/createUser" method="post">
+			{% csrf_token %}
+			<p>First Name: <input type="text" name="first_name" value=""></p>
+			<p>Last Name: <input type="text" name="last_name"></p>
+			<p>Email: <input type="text" name="email" value=""></p>
+			<p>Password: <input type="text" name="pw" value=""></p>
+			<p>Confirm Password: <input type="text" name="cw" value=""></p>
+			<!-- <input class="register_button" type="submit" name="" value="Register"> -->
+			<button style="background-color:lightgreen" class="btn waves-effect waves-light" type="submit" name="action">
+		    	<i class="material-icons center">Register!</i>
+		  	</button>
+		</form>
+	</div>
+
+	<div class="login">
+		<form action="/login" method="post">
+			{% csrf_token %}
+			<p>Email: <input type="text" name="email" value=""></p>
+			<p>Password: <input type="text" name="pw" value=""></p>
+			<button style="background-color:lightgreen" class="btn waves-effect waves-light" type="submit" name="action">
+		    	<i class="material-icons center">Login!</i>
+		  	</button>
+			<!-- <input type="submit" name="" value="Login"> -->
+		</form>
+	</div>
+
+</body>
+</html>
